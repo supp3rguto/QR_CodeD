@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR_CodeD</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    QR_CodeD
+  </header>
+  <div class="container">
+    <h1>Generate QR Code with Password Protection</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+      <label for="file">Select a file:</label>
+      <input type="file" id="file" name="file" required>
+      <label for="password">Create a password:</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" required>
+        <span class="toggle-password" onclick="togglePassword('password')">&#128065;</span>
+      </div>
+      <input type="submit" value="Generate QR Code">
+    </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+  <footer>
+    © 2024 Augusto Barbosa. All rights reserved.
+  </footer>
+  <script>
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+    }
+  </script>
+</body>
+</html>
