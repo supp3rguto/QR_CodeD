@@ -391,7 +391,7 @@ footer {
 
 ## Considerações Finais
 
-Este projeto é uma solução prática para compartilhar arquivos de forma segura através de códigos QR protegidos por senha. Sinta-se à vontade para contribuir com melhorias ou relatar quaisquer problemas no repositório do projeto.
+Este projeto é uma solução prática para compartilhar arquivos de forma segura através de códigos QR protegidos por senha. Sinta-se à vontade para relatar quaisquer problemas no repositório do projeto.
 
 © 2024 Augusto Barbosa. All rights reserved.
 ```
