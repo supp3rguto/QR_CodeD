@@ -1,24 +1,24 @@
 # QR_CodeD
 
-QR_CodeD é uma aplicação web desenvolvida em Flask que permite aos usuários fazer upload de arquivos e protegê-los com senha. Após o upload, um código QR é gerado, que pode ser compartilhado com outras pessoas. Quando o código QR é escaneado, o usuário é direcionado a uma página onde deve inserir a senha correta para fazer o download do arquivo.
+QR_CodeD is a web application developed in Flask that allows users to upload files and protect them with a password. After the upload, a QR code is generated, which can be shared with others. When the QR code is scanned, the user is directed to a page where they must enter the correct password to download the file.
 
-## Sumário
+## Summary
 
-1. [Introdução](#introdução)
-2. [Estrutura do Projeto](#estrutura-do-projeto)
-3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-4. [Funcionalidades](#funcionalidades)
-5. [Configuração e Execução](#configuração-e-execução)
-6. [Código Fonte](#código-fonte)
-7. [Considerações Finais](#considerações-finais)
+1. [Introduction](#introduction)
+2. [Project Structure](#project-structure)
+3. [Technologies Used](#technologies-used)
+4. [Features](#features)
+5. [Setup and Execution](#setup-and-execution)
+6. [Source Code](#source-code)
+7. [Final Considerations](#final-considerations)
 
-## Introdução
+## Introduction
 
-QR_CodeD é uma solução prática para compartilhar arquivos de forma segura através de códigos QR protegidos por senha. A aplicação foi desenvolvida com foco na simplicidade e na segurança, utilizando as melhores práticas de desenvolvimento web.
+QR_CodeD is a practical solution for securely sharing files through password-protected QR codes. The application was developed with a focus on simplicity and security, using best practices in web development.
 
-## Estrutura do Projeto
+## Project Structure
 
-A estrutura do projeto é organizada da seguinte forma:
+The project structure is organized as follows:
 
 ```
 qr_coded_project/
@@ -31,81 +31,81 @@ qr_coded_project/
 │   └── password.html
 │
 ├── uploads/
-│   (os arquivos enviados serão armazenados aqui)
+│   (uploaded files will be stored here)
 │
 └── app.py
 ```
 
-- **static/**: Contém o arquivo de estilo CSS.
-- **templates/**: Contém os templates HTML do projeto.
-- **uploads/**: Diretório onde os arquivos enviados são armazenados.
-- **app.py**: Script principal da aplicação Flask.
+- **static/**: Contains the CSS style file.
+- **templates/**: Contains the project's HTML templates.
+- **uploads/**: Directory where uploaded files are stored.
+- **app.py**: Main script of the Flask application.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Flask**: Framework web utilizado para construir a aplicação.
-- **Werkzeug**: Utilitário usado para operações seguras de upload de arquivos.
-- **QRCode**: Biblioteca utilizada para gerar códigos QR.
-- **HTML/CSS**: Utilizados para construir a interface do usuário.
+- **Flask**: Web framework used to build the application.
+- **Werkzeug**: Utility used for secure file upload operations.
+- **QRCode**: Library used to generate QR codes.
+- **HTML/CSS**: Used to build the user interface.
 
-## Funcionalidades
+## Features
 
-1. **Upload de Arquivos**:
-    - Os usuários podem fazer upload de arquivos através da interface web.
-    - Arquivos permitidos: png, jpg, jpeg, gif, pdf, mp4, mp3.
+1. **File Upload**:
+    - Users can upload files through the web interface.
+    - Allowed file types: png, jpg, jpeg, gif, pdf, mp4, mp3.
     
-2. **Proteção por Senha**:
-    - Após o upload, o usuário deve fornecer uma senha que será usada para proteger o arquivo.
+2. **Password Protection**:
+    - After the upload, the user must provide a password that will be used to protect the file.
     
-3. **Geração de QR Code**:
-    - Um código QR é gerado contendo a URL que redireciona para a página onde a senha deve ser inserida.
-    - O código QR é fornecido para o usuário para que possa ser compartilhado.
+3. **QR Code Generation**:
+    - A QR code is generated containing the URL that redirects to the page where the password must be entered.
+    - The QR code is provided to the user to be shared.
     
-4. **Validação de Senha e Download**:
-    - Ao acessar a URL do QR code, o usuário deve inserir a senha correta para baixar o arquivo.
+4. **Password Validation and Download**:
+    - Upon accessing the QR code URL, the user must enter the correct password to download the file.
 
-## Configuração e Execução
+## Setup and Execution
 
-### Pré-requisitos
+### Prerequisites
 
 - Python 3.x
-- Pip (gerenciador de pacotes do Python)
+- Pip (Python package manager)
 
-### Instalação
+### Installation
 
-1. **Clone o repositório**:
+1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/seu-usuario/qr_coded_project.git
+    git clone https://github.com/your-username/qr_coded_project.git
     cd qr_coded_project
     ```
 
-2. **Crie um ambiente virtual**:
+2. **Create a virtual environment**:
 
     ```bash
     python -m venv venv
-    source venv/bin/activate   # No Windows use `venv\Scripts\activate`
+    source venv/bin/activate   # On Windows use `venv\Scripts\activate`
     ```
 
-3. **Instale as dependências**:
+3. **Install dependencies**:
 
     ```bash
     pip install Flask qrcode[pil]
     ```
 
-### Execução
+### Execution
 
-1. **Execute o aplicativo**:
+1. **Run the application**:
 
     ```bash
     python app.py
     ```
 
-2. **Acesse no navegador**:
+2. **Access in the browser**:
 
-    Abra o navegador e vá para `http://localhost:5000`
+    Open your browser and go to `http://localhost:5000`
 
-## Código Fonte
+## Source Code
 
 ### `app.py`
 
@@ -117,33 +117,33 @@ import io
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # chave secreta para uso do flash messages
+app.secret_key = 'supersecretkey'  # secret key for using flash messages
 
-# Configurações de upload
+# Upload configurations
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'mp4', 'mp3'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Função para verificar se o arquivo é permitido
+# Function to check if the file is allowed
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Dicionário para armazenar informações dos arquivos e senhas
+# Dictionary to store file information and passwords
 files_info = {}
 
-# Endereço IP do notebook
+# Notebook IP address
 NOTEBOOK_IP = '192.168.1.11'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
   if request.method == 'POST':
     if 'file' not in request.files:
-      flash('Nenhum arquivo enviado')
+      flash('No file uploaded')
       return redirect(request.url)
      
     file = request.files['file']
     if file.filename == '':
-      flash('Nenhum arquivo selecionado')
+      flash('No file selected')
       return redirect(request.url)
      
     if file and allowed_file(file.filename):
@@ -181,7 +181,7 @@ def password(file_id):
       filename = files_info[file_id]['filename']
       return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
     else:
-      flash('Senha incorreta. Tente novamente.')
+      flash('Incorrect password. Please try again.')
 
   return render_template('password.html', file_id=file_id)
 
@@ -285,7 +285,9 @@ if __name__ == '__main__':
   <script>
     function togglePassword(inputId) {
      const input = document.getElementById(inputId);
-     const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+     const type = input.getAttribute('type') === 'password' ? 'text' :
+
+ 'password';
      input.setAttribute('type', type);
     }
   </script>
@@ -389,9 +391,8 @@ footer {
 }
 ```
 
-## Considerações Finais
+## Final Considerations
 
-Este projeto é uma solução prática para compartilhar arquivos de forma segura através de códigos QR protegidos por senha. Sinta-se à vontade para relatar quaisquer problemas no repositório do projeto.
+This project is a practical solution for securely sharing files through password-protected QR codes. Feel free to report any issues on the project repository.
 
 © 2024 Augusto Barbosa. All rights reserved.
-```
